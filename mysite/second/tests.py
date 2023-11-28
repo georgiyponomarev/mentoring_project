@@ -13,7 +13,7 @@ class FileFieldModelTestCase(TestCase):
 
         # Create an instance of YourModel with the test file
         instance = FileFieldModel(file=test_file)
-        instance.save()
+        # instance.save()
 
         # Calculate hash and assert
         expected_hash = hashlib.sha256(test_file_content).hexdigest()

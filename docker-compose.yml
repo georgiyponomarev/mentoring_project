@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     build: ./mysite
-    command: python manage.py runserver 127.0.0.1:8000
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./mysite/:/usr/src/mysite/
     ports:
@@ -12,6 +12,8 @@ services:
       - ./.env.dev
     depends_on:
       - db
+      - my_redis
+  
   db:
     image: postgres:15
     volumes:
@@ -20,6 +22,20 @@ services:
       - POSTGRES_USER=hello_django
       - POSTGRES_PASSWORD=hello_django
       - POSTGRES_DB=hello_django_dev
+  
+  celery:
+    build: ./mysite
+    command: celery -A mysite worker -l info
+    volumes:
+      - ./mysite/:/usr/src/mysite/
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+      - my_redis
+  
+  my_redis:
+    image: "redis:alpine"
 
 volumes:
   postgres_data:

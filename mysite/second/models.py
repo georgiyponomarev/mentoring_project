@@ -5,9 +5,9 @@ import hashlib
 class FileFieldModel(models.Model):
     file = models.FileField(upload_to='uploads/', max_length=254)
 
-    def save(self, *args, **kwargs):
-        # Override save method to prevent actual file saving
-        pass
+    # def save(self, *args, **kwargs):
+    #     # Override save method to prevent actual file saving
+    #     pass
 
     def calculate_hash(self):
         """This method returns the SHA256 hash of the file passed into it"""

@@ -1,3 +1,5 @@
+import time
+
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
@@ -5,7 +7,7 @@ from django.utils import timezone
 from django.views import generic
 
 from .models import Choice, Question
-
+from .tasks import expensive_task
 
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
@@ -45,6 +47,7 @@ def index(request):
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+    expensive_task.apply_async([1, 2])
     try:
         selected_choice = question.choice_set.get(pk=request.POST["choice"])
     except (KeyError, Choice.DoesNotExist):

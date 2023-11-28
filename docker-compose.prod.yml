@@ -12,12 +12,28 @@ services:
       - ./.env.prod
     depends_on:
       - db
+      - my_redis
+
   db:
     image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env.prod.db
+
+  celery:
+    build: ./mysite
+    command: celery -A mysite worker -l info
+    volumes:
+      - ./mysite/:/usr/src/mysite/
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - db
+      - my_redis
+  
+  my_redis:
+    image: "redis:alpine"
 
 volumes:
   postgres_data:
