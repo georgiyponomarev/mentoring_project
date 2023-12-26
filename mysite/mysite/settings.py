@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-m2)ij4-j6l6-!3$r5vtpfvl=0t!zj#(b=e^1l)sqjg%o*204_^'
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-m2)ij4-j6l6-!3$r5vtpfvl=0t!zj#(b=e^1l)sqjg%o*204_^")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -31,7 +31,7 @@ DEBUG = bool(os.environ.get("DEBUG", default=0))
 # ALLOWED_HOSTS = ['*']
 # 'DJANGO_ALLOWED_HOSTS' should be a single string of hosts with a space between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
-ALLOWED_HOSTS = [os.environ.get("DJANGO_ALLOWED_HOSTS")]
+ALLOWED_HOSTS = [os.environ.get("DJANGO_ALLOWED_HOSTS", '*')]
 
 # Application definition
 
@@ -144,5 +144,9 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # Celery settings
 # CELERY_BROKER_URL = "redis://localhost:6379"
 # CELERY_RESULT_BACKEND = "redis://localhost:6379"
-CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
-CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND")
+CELERY_BROKER_URL = os.environ.get(
+    "CELERY_BROKER_URL", "redis://localhost:6379"
+)
+CELERY_RESULT_BACKEND = os.environ.get(
+    "CELERY_RESULT_BACKEND", "redis://localhost:6379"
+)
