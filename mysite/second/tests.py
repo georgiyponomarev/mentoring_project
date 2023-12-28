@@ -4,6 +4,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 import hashlib
 
+
 # Create your tests here.
 class FileFieldModelTestCase(TestCase):
     def test_calculate_hash(self):

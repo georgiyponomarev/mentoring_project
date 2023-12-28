@@ -1,6 +1,7 @@
 from django.db import models
 import hashlib
 
+
 # Create your models here.
 class FileFieldModel(models.Model):
     file = models.FileField(upload_to='uploads/', max_length=254)

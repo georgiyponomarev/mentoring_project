@@ -9,6 +9,7 @@ from django.views import generic
 from .models import Choice, Question
 from .tasks import expensive_task
 
+
 class IndexView(generic.ListView):
     template_name = "polls/index.html"
     context_object_name = "latest_question_list"
