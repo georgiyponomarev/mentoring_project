@@ -44,6 +44,8 @@ RUN addgroup --system mysite && adduser --system --group mysite
 ENV HOME=/home/mysite
 ENV APP_HOME=/home/mysite/web
 RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
+RUN mkdir $APP_HOME/mediafiles
 WORKDIR $APP_HOME
 
 # install dependencies
@@ -69,5 +71,3 @@ USER mysite
 
 # run entrypoint.prod.sh
 ENTRYPOINT ["/home/mysite/web/entrypoint.prod.sh"]
-
-RUN touch file1.txt && rm file1.txt
