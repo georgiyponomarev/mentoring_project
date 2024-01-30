@@ -1,5 +1,8 @@
 # pull official base image
-FROM python:3.11.4-slim-buster
+FROM python:3.11.4-slim-buster AS base
+
+# FROM base AS test
+# FROM base AS prod
 
 # set work directory
 WORKDIR /usr/src/mysite
